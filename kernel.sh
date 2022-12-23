@@ -98,7 +98,7 @@ sudo mkinitcpio -k "$VERSION" -g /boot/initramfs-linux-"$VERSION".img
 echo "creating the new entry"
 echo ""
 sudo touch /boot/loader/entries/arch-"$VERSION".conf
-echo "title   $VERSION" | sudo tee -a /boot/loader/entries/arch-"$VERSION".conf
+echo "title   $VERSION" | sudo tee /boot/loader/entries/arch-"$VERSION".conf
 echo "linux   /vmlinuz-linux-$VERSION" | sudo tee -a /boot/loader/entries/arch-"$VERSION".conf
 echo "initrd  $UCODE" | sudo tee -a /boot/loader/entries/arch-"$VERSION".conf
 echo "initrd  /initramfs-linux-$VERSION.img" | sudo tee -a /boot/loader/entries/arch-"$VERSION".conf
