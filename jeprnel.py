@@ -45,7 +45,7 @@ def update(last_version):
     return
 
 # main
-print("--  --  -- jeprnel --  --  by Jep")
+print("--  --  JEPRNEL, by Jep  -- --")
 print("")
 
 last_version = get_kernel()
@@ -82,5 +82,5 @@ else:
             print("Exiting...")
             exit()
 
-        print("Input is not valid, please type 'Y' or 'n'")
+        print("Input is not valid, please type 'y' or 'N'")
 
