@@ -45,6 +45,9 @@ def update(last_version):
     return
 
 # main
+print("--  --  -- jeprnel --  --  by Jep")
+print("")
+
 last_version = get_kernel()
 
 if last_version[1] > check_kernel().strip():
