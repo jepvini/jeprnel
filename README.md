@@ -14,8 +14,9 @@ It works only using systemd-boot and not grub, it's an easy fix but I have to st
 
 - the only requirments for the script are wget, python3 and some pip modules:
 
-```# pacman -S wget  
-$ pip install requests beautifulsoup4```
+```# pacman -S wget```  
+
+```$ pip install requests beautifulsoup4```
 
 - edit the jeprnel.py file and set the dir name (default will be in $HOME, and called Kernel)
 
