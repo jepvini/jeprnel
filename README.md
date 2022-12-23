@@ -4,7 +4,7 @@ JEPRNEL is a simple bash and python script for the mad-lads who run self compile
 
 *It checks for update, downloads them, checks gpg keys, compiles, makes mkinitcpio, adds boot entries.* 
 
-It works only using systemd-boot and not grub, it's an easy fix but I have to study for my exams :(
+It works only with systemd-boot and does **NOT** support grub, it's an easy fix but I have to study for my exams :(
 
 ### GUIDE
 
