@@ -23,4 +23,14 @@ It works only using systemd-boot and not grub, it's an easy fix but I have to st
 
 - simply run the script and everything should work out of the box
 
+- put a .config file on this folder, more info below
+
 **NOTE: after compiling the kernel the user password will be required!**
+
+### CONFIG FILE
+
+The configuration file of the kernel is called ```.config``` and it must be placed in the kernel main directory. Don't worry, the script handles everything. You just need to provide a ```.config``` file and put it in this folder. 
+
+For the creation of the file I suggest to take a look at the [Gentoo Wiki](https://wiki.gentoo.org/wiki/Kernel/Configuration), the [Arch Wiki](https://wiki.archlinux.org/title/Kernel/Traditional_compilation) and some yt videos.
+
+If before compiling you're asked to include or no some entries it is normal. New features are not in your ```.config``` so you need to manually set them. 
