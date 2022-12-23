@@ -24,15 +24,13 @@ DIR='/home/' + str(USER_NAME) + '/' + DIR_NAME
 
 # Checks latest kernel from URL
 def get_kernel():
-    req = requests.get(URL)
-    if req.status_code == 200:
+    try:
+        req = requests.get(URL)
         bs_txt = bs4.BeautifulSoup(req.text, 'html.parser')
         kernel_version_td = bs_txt.find(id="latest_link")
-        if kernel_version_td != None:
-            return [kernel_version_td.find('a').get('href'), kernel_version_td.find('a').getText()]
-
-    else:
-        print('Site is not reachible, make sure to be online')
+        return [kernel_version_td.find('a').get('href'), kernel_version_td.find('a').getText()]
+    except requests.ConnectionError:
+        print("URL not reachable, check connection and retry")
         exit(0)
 
 # Checks current kernel
@@ -43,7 +41,8 @@ def check_kernel():
 # Updates the kernel -> kernel.sh is a bash script
 def update(last_version):
     folder_name = 'linux-' + last_version[1]
-    sb.run(['./kernel.sh', DIR, last_version[0], last_version[0].replace('.xz', '.sign'), folder_name, last_version[1], UCODE, OPTIONS])
+    # sb.run(['./kernel.sh', DIR, last_version[0], last_version[0].replace('.xz', '.sign'), folder_name, last_version[1], UCODE, OPTIONS])
+    return
 
 # main
 last_version = get_kernel()
