@@ -19,8 +19,8 @@ cd "$DIR" || exit
 
 pwd
 
-wget "$URL"
-wget "$URL_SIGN"
+wget "$URL" -O "$NAME.tar.xz"
+wget "$URL_SIGN" -O"$NAME.tar.sign"
 
 echo "unxz-ing the file"
 unxz "$NAME.tar.xz"
