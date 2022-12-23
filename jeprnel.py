@@ -41,7 +41,7 @@ def check_kernel():
 # Updates the kernel -> kernel.sh is a bash script
 def update(last_version):
     folder_name = 'linux-' + last_version[1]
-    # sb.run(['./kernel.sh', DIR, last_version[0], last_version[0].replace('.xz', '.sign'), folder_name, last_version[1], UCODE, OPTIONS])
+    sb.run(['./kernel.sh', DIR, last_version[0], last_version[0].replace('.xz', '.sign'), folder_name, last_version[1], UCODE, OPTIONS])
     return
 
 # main
