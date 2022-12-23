@@ -1,3 +1,5 @@
+#!/bin/python
+
 import requests
 import bs4
 import subprocess as sb
@@ -28,8 +30,10 @@ def get_kernel():
         kernel_version_td = bs_txt.find(id="latest_link")
         if kernel_version_td != None:
             return [kernel_version_td.find('a').get('href'), kernel_version_td.find('a').getText()]
-    
-    return "Error"
+
+    else:
+        print('Site is not reachible, make sure to be online')
+        exit(0)
 
 # Checks current kernel
 def check_kernel():
@@ -41,14 +45,12 @@ def update(last_version):
     folder_name = 'linux-' + last_version[1]
     sb.run(['./kernel.sh', DIR, last_version[0], last_version[0].replace('.xz', '.sign'), folder_name, last_version[1], UCODE, OPTIONS])
 
-    return 0
-
 # main
 last_version = get_kernel()
 
-if last_version[1] >= check_kernel().strip():
+if last_version[1] > check_kernel().strip():
     print("New kernel", last_version[1], "avaible")
-    print("Would you like to update?")
+    print("Would you like to update? [Y,n]")
     while 1:
         char = input()
         if char.strip().lower() == 'y': 
@@ -65,6 +67,18 @@ if last_version[1] >= check_kernel().strip():
 
 else:
     print(check_kernel().strip(), "is the latest version")
+    print('Would you like to re update anyway? [y, N]')
+    while 1:
+        char = input()
+        if char.strip().lower() == 'y': 
+            update(last_version)
+            break
+        elif not char: 
+            print('Exiting...')
+            break
+        elif char.strip().lower() == 'n': 
+            print("Exiting...")
+            exit()
 
-
+        print("Input is not valid, please type 'Y' or 'n'")
 
