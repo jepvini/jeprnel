@@ -99,13 +99,9 @@ echo "initrd  $UCODE" | sudo tee -a /boot/loader/entries/arch-"$VERSION".conf
 echo "initrd  /initramfs-linux-$VERSION.img" | sudo tee -a /boot/loader/entries/arch-"$VERSION".conf
 echo "options $OPTIONS" | sudo tee -a /boot/loader/entries/arch-"$VERSION".conf
 
-mv "$SCRIPT_DIR/.config" "$SCRIPT_DIR/.config.old"
-
-cp .config "$SCRIPT_DIR\_$VERSION"
-
 echo ""
 echo "done!"
 echo "everything is set, just restart your laptop and choose $VERSION as kernel entry"
-echo "enjoy your kernel"
+echo "enjoy your kernel" 
 echo ""
 echo "Jep"

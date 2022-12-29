@@ -76,9 +76,10 @@ def main():
             sb.run(['./kernel_manual.sh', sys.argv[1].replace('.tar.xz', ''), sys.argv[1].replace('.xz', '.sign'), folder_name, sys.argv[2], UCODE, OPTIONS])
             exit(0)
         
-    elif len(sys.argv) != 0:
+    elif len(sys.argv) > 1:
         sb.run(['cat', 'README.md'])
         exit(0)
+
 
     last_version = get_kernel()
 
