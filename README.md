@@ -6,6 +6,17 @@ JEPRNEL is a simple bash and python script for the mad-lads who run self compile
 
 It works only with systemd-boot and does **NOT** support grub, it's an easy fix but I have to study for my exams :(
 
+### USE
+
+The script with no arguments will search online for the last kernel version and update if necessary
+
+**Flags**
+ 
+- ```-d [kernel_version]``` -> deletes initrams, mvlinuz and entry of the kernel version
+
+- ```[kernel_file.tar.xz] [kernel_version]``` -> the script will install that kernel  
+note: if there is a ```kernel_file.tar.sign``` in the same folder of the file the gpg key will be checked
+
 ### GUIDE
 
 - make sure that you have all the dependencies for the compilation:

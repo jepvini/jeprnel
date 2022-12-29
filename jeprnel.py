@@ -3,6 +3,7 @@
 import requests
 import bs4
 import subprocess as sb
+import sys
 
 # Macro Sections
 URL='https://www.kernel.org/'
@@ -45,42 +46,76 @@ def update(last_version):
     return
 
 # main
-print("--  --  JEPRNEL, by Jep  -- --")
-print("")
+def main():
 
-last_version = get_kernel()
+    print("--  --  JEPRNEL, by Jep  -- --")
+    print("")
 
-if last_version[1] > check_kernel().strip():
-    print("New kernel", last_version[1], "avaible")
-    print("Would you like to update? [Y,n]")
-    while 1:
-        char = input()
-        if char.strip().lower() == 'y': 
-            update(last_version)
-            break
-        elif not char: 
-            update(last_version)
-            break
-        elif char.strip().lower() == 'n': 
-            print("Exiting...")
-            exit()
+    if len(sys.argv) == 3:
+        if sys.argv[1] == '-d':
 
-        print("Input is not valid, please type 'Y' or 'n'")
+            print('Are you shure to delete Linux ', sys.argv[2], '? [y,N]')
 
-else:
-    print(check_kernel().strip(), "is the latest version")
-    print('Would you like to re update anyway? [y, N]')
-    while 1:
-        char = input()
-        if char.strip().lower() == 'y': 
-            update(last_version)
-            break
-        elif not char: 
-            print('Exiting...')
-            break
-        elif char.strip().lower() == 'n': 
-            print("Exiting...")
-            exit()
+            if input().lower().strip() != 'y': 
+                print('Exiting...')
+                exit(0) 
 
-        print("Input is not valid, please type 'y' or 'N'")
+            initrams = '/boot/initramfs-linux-' + sys.argv[2] + '.img'
+            vmlinuz = '/boot/vmlinuz-linux-' + sys.argv[2]
+            entry = '/boot/loader/entries/arch-' + sys.argv[2] + '.conf'
 
+            sb.run(['sudo', 'rm', initrams])
+            sb.run(['sudo', 'rm', vmlinuz])
+            sb.run(['sudo', 'rm', entry])
+
+            print('Linux version', sys.argv[2], 'removed')
+            exit(0)
+
+        else:
+            folder_name = 'linux-' + sys.argv[2]
+            sb.run(['./kernel_manual.sh', sys.argv[1].replace('.tar.xz', ''), sys.argv[1].replace('.xz', '.sign'), folder_name, sys.argv[2], UCODE, OPTIONS])
+            exit(0)
+        
+    elif len(sys.argv) != 0:
+        sb.run(['cat', 'README.md'])
+        exit(0)
+
+    last_version = get_kernel()
+
+    if last_version[1] > check_kernel().strip():
+        print("New kernel", last_version[1], "avaible")
+        print("Would you like to update? [Y,n]")
+        while 1:
+            char = input()
+            if char.strip().lower() == 'y': 
+                update(last_version)
+                break
+            elif not char: 
+                update(last_version)
+                break
+            elif char.strip().lower() == 'n': 
+                print("Exiting...")
+                exit()
+
+            print("Input is not valid, please type 'Y' or 'n'")
+
+    else:
+        print(check_kernel().strip(), "is the latest version")
+        print('Would you like to re-update [y, N]')
+        while 1:
+            char = input()
+            if char.strip().lower() == 'y': 
+                update(last_version)
+                break
+            elif not char: 
+                print('Exiting...')
+                break
+            elif char.strip().lower() == 'n': 
+                print("Exiting...")
+                exit()
+
+            print("Input is not valid, please type 'y' or 'N'")
+
+
+if __name__ == '__main__':
+    sys.exit(main())
