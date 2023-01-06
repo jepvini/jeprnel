@@ -77,6 +77,7 @@ def main():
             exit(0)
         
     elif len(sys.argv) > 1:
+        print(len(sys.argv))
         sb.run(['cat', 'README.md'])
         exit(0)
 

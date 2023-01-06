@@ -84,7 +84,9 @@ make -j"$MAX_THREADS"
 make -j"$MAX_THREADS" modules
 echo ""
 echo "sudo password is required for installing the modules"
+echo "press enter to continue"
 echo ""
+read -r
 sudo make -j"$MAX_THREADS" modules_install
 sudo cp -v arch/x86/boot/bzImage /boot/vmlinuz-linux-"$VERSION"
 sudo mkinitcpio -k "$VERSION" -g /boot/initramfs-linux-"$VERSION".img
