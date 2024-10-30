@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import os
 import subprocess as sb
 import sys
 
@@ -17,7 +18,7 @@ DIR_NAME = "Kernel"
 #################################################################
 USER_NAME = sb.check_output("whoami", encoding="utf-8").strip()
 DIR = "/home/" + str(USER_NAME) + "/" + DIR_NAME
-
+SCRIPT_DIR = os.getcwd() + "/kernel.sh"
 
 # Checks latest kernel from URL
 def get_kernel():
@@ -44,7 +45,7 @@ def update(last_version):
     folder_name = "linux-" + last_version[1]
     sb.run(
         [
-            "./kernel.sh",
+            SCRIPT_DIR,
             DIR,
             last_version[0],
             last_version[0].replace(".xz", ".sign"),
