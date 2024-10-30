@@ -6,7 +6,7 @@ CURRENT_DIR="$(pwd)"
 echo "Creating file"
 
 echo "#!/usr/bin/env bash" > "kernel"
-echo "$CURRENT_DIR"/jeprnel.py >> "kernel"
+echo "$CURRENT_DIR"/jeprnel.py \$@ >> "kernel"
 
 chmod +x kernel
 

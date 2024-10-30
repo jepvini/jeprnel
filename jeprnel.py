@@ -20,6 +20,7 @@ USER_NAME = sb.check_output("whoami", encoding="utf-8").strip()
 DIR = "/home/" + str(USER_NAME) + "/" + DIR_NAME
 SCRIPT_DIR = os.getcwd() + "/kernel.sh"
 
+
 # Checks latest kernel from URL
 def get_kernel():
     try:
@@ -58,6 +59,11 @@ def update(last_version):
 
 # main
 def main():
+
+    if len(sys.argv) == 2:
+        if sys.argv[1] == "-v":
+            print(get_kernel()[1])
+            exit()
 
     print("--  --  JEPRNEL, by Jep  -- --")
     print("")
