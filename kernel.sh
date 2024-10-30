@@ -5,8 +5,6 @@ URL=$2
 URL_SIGN=$3
 NAME=$4
 VERSION=$5
-UCODE=$6
-OPTIONS=$7
 
 
 MAX_THREADS=$(($(grep -c ^processor /proc/cpuinfo) + 1))
@@ -37,10 +35,10 @@ echo "checking gpg key..."
 echo ""
 
 set -o pipefail
-if echo "(gpg --verify "$NAME.tar.sign" "$NAME.tar" 2>&1 >/dev/null)" | grep 'Good Signature': 
+if echo "(gpg --verify "$NAME.tar.sign" "$NAME.tar" 2>&1 >/dev/null)" | grep 'Good Signature':
 then
-    echo "The signature for the tar file is not a good signature. Exiting now."
-    exit 1
+  echo "The signature for the tar file is not a good signature. Exiting now."
+  exit 1
 fi
 
 echo "un-tar-ing the tar..."
@@ -57,7 +55,8 @@ cd "$NAME" || exit
 echo "cleaning..."
 echo ""
 
-make mrproper
+sleep 1
+# make mrproper
 
 # # cp the config
 cp "$SCRIPT_DIR"/.config .
@@ -69,7 +68,7 @@ echo "arch is good"
 echo ""
 
 echo "compilations will start in 10 seconds"
-echo "make shure that you are connected to the AC and the laptop can breath"
+echo "make sure that you are connected to the AC and the laptop can breath"
 echo ""
 sleep 5
 echo "5"
@@ -91,20 +90,12 @@ echo ""
 echo "sudo password is required for installing the modules"
 echo "press enter to continue..."
 echo ""
-read -r 
+read -r
 sudo make -j"$MAX_THREADS" modules_install
 sudo cp -v arch/x86/boot/bzImage /boot/vmlinuz-linux-"$VERSION"
-sudo mkinitcpio -k "$VERSION" -g /boot/initramfs-linux-"$VERSION".img
 
-# entry creation 
-echo "creating the new entry"
-echo ""
-sudo touch /boot/loader/entries/arch-"$VERSION".conf
-echo "title   $VERSION" | sudo tee /boot/loader/entries/arch-"$VERSION".conf
-echo "linux   /vmlinuz-linux-$VERSION" | sudo tee -a /boot/loader/entries/arch-"$VERSION".conf
-echo "initrd  $UCODE" | sudo tee -a /boot/loader/entries/arch-"$VERSION".conf
-echo "initrd  /initramfs-linux-$VERSION.img" | sudo tee -a /boot/loader/entries/arch-"$VERSION".conf
-echo "options $OPTIONS" | sudo tee -a /boot/loader/entries/arch-"$VERSION".conf
+# entry creation
+sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 mv "$SCRIPT_DIR/.config" "$SCRIPT_DIR/.config.old"
 
