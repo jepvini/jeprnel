@@ -69,6 +69,16 @@ def main():
     print("")
 
     if len(sys.argv) == 3:
+        if sys.argv[1] == "-c":
+            sb.run(
+                [os.getcwd() + "/rebuild.sh", DIR + "/linux-" + sys.argv[2], SCRIPT_DIR]
+            )
+            exit()
+        if sys.argv[1] == "-e":
+            sb.run(
+                [os.getcwd() + "/edit.sh", DIR + "/linux-" + sys.argv[2], os.getcwd()]
+            )
+            exit()
         if sys.argv[1] == "-d":
 
             print("Are you sure to delete Linux ", sys.argv[2], "? [y,N]")
