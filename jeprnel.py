@@ -71,12 +71,21 @@ def main():
     if len(sys.argv) == 3:
         if sys.argv[1] == "-c":
             sb.run(
-                [os.getcwd() + "/rebuild.sh", DIR + "/linux-" + sys.argv[2], SCRIPT_DIR]
+                [
+                    sys.argv[0].replace("jeprnel.py", "rebuild.sh"),
+                    DIR + "/linux-" + sys.argv[2],
+                    sys.argv[0].replace("jeprnel.py", ""),
+                    sys.argv[2],
+                ]
             )
             exit()
         if sys.argv[1] == "-e":
             sb.run(
-                [os.getcwd() + "/edit.sh", DIR + "/linux-" + sys.argv[2], os.getcwd()]
+                [
+                    sys.argv[0].replace("jeprnel.py", "edit.sh"),
+                    DIR + "/linux-" + sys.argv[2],
+                    sys.argv[0].replace("jeprnel.py", ""),
+                ]
             )
             exit()
         if sys.argv[1] == "-d":

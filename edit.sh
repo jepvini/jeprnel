@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cp .config "$1"
+cp "$2".config "$1"
 cd "$1" || exit
 
 echo "loading..."

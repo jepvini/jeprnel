@@ -2,12 +2,13 @@
 
 
 # # cp the config
+cd "$1" || exit
+
+
 SCRIPT_DIR="$2"
 cp "$SCRIPT_DIR"/.config .
 echo "your config is here"
 echo ""
-
-cd "$1" || exit
 
 MAX_THREADS=$(($(grep -c ^processor /proc/cpuinfo) + 1))
 
@@ -36,14 +37,14 @@ echo "press enter to continue..."
 echo ""
 read -r
 sudo make -j"$MAX_THREADS" modules_install
-sudo cp -v arch/x86/boot/bzImage /boot/vmlinuz-linux-"$VERSION"
+sudo cp -v arch/x86/boot/bzImage /boot/vmlinuz-linux-"$3"
 
 # entry creation
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 echo ""
 echo "done!"
-echo "everything is set, just restart your laptop and choose $VERSION as kernel entry"
+echo "everything is set, just restart your laptop and choose $3 as kernel entry"
 echo "enjoy your kernel"
 echo ""
 echo "Jep"
