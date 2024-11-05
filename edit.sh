@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
+cp .config "$1"
 cd "$1" || exit
 
 echo "loading..."
 
 make menuconfig
-echo "$2"
+
 cp .config "$2"

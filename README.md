@@ -1,12 +1,12 @@
 # JEPRNEL
 
-JEPRNEL is a simple bash and python script for the mad-lads who run self compiled kernel on arch linux.
+JEPRNEL is a *simple* bash and python script for the mad-lads who run self compiled kernel on arch linux.
 
 *It checks for update, downloads them, checks gpg keys, compiles, makes mkinitcpio, adds boot entries.*
 
 It works only with grub and does **NOT** support systemd-boot, it's an easy fix but I have to study for my exams :(
 
-The script will not create a initramfs as the filesystems' types as well as the ssd protocol should be included in the kernel and not loaded as a module
+The script will not create a initramfs as the filesystems' types as well as the ssd protocol should be included in the kernel and not loaded as a module (cool factor +69420)
 
 ### USE
 
@@ -14,10 +14,10 @@ The script with no arguments will search online for the last kernel version and 
 
 **Flags**
 
-- `-d [kernel_version]` -> deletes initrams, mvlinuz and entry of the kernel version
 
-- `[kernel_file.tar.xz] [kernel_version]` -> the script will install that kernel
-note: if there is a `kernel_file.tar.sign` in the same folder of the file the gpg key will be checked
+- `-e [kernel_version]` -> edit the `.config` in the git repo and copies it to the `version` dir
+- `-c [kernel_version]` -> compile the `version` kernel and installs it. Useful if the .config has been edited but the kernel version i still the same
+- `-d [kernel_version]` -> deletes mvlinuz and entry of the kernel version
 
 ### GUIDE
 
@@ -25,7 +25,7 @@ note: if there is a `kernel_file.tar.sign` in the same folder of the file the gp
 
 `# pacman -S base-devel xmlto kmod inetutils bc libelf git cpio perl tar xz`
 
-- the only requirements for the script are wget, python3 and some pip modules:
+- the only requirements for the script are wget and some python modules:
 
 `# pacman -S wget python-bs4 python-requests`
 
